@@ -45,6 +45,8 @@ if __name__ == '__main__':
             grid.table[x_pos][y_pos].is_active = not grid.table[x_pos][y_pos].is_active
             grid.table[x_pos+1][y_pos].is_active = False
 
+        pygame.time.delay(500)
+        y_pos += 1
         for x, row in enumerate(grid.table):
             for y, square in enumerate(row):
                 if square.is_active:
