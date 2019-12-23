@@ -37,13 +37,20 @@ if __name__ == '__main__':
         screen.fill((255, 255, 255))
         keys = pygame.key.get_pressed()
         if keys[pygame.K_RIGHT]:
-            x_pos +=1
-            grid.table[x_pos][y_pos].is_active = not grid.table[x_pos][y_pos].is_active
-            grid.table[x_pos-1][y_pos].is_active = False
+            print(x_pos)
+            if x_pos == 9:
+                continue
+            else:
+                x_pos +=1
+                grid.table[x_pos][y_pos].is_active = not grid.table[x_pos][y_pos].is_active
+                grid.table[x_pos-1][y_pos].is_active = False
         elif keys[pygame.K_LEFT]:
-            x_pos -=1
-            grid.table[x_pos][y_pos].is_active = not grid.table[x_pos][y_pos].is_active
-            grid.table[x_pos+1][y_pos].is_active = False
+            if x_pos == 0:
+                continue
+            else:
+                x_pos -=1
+                grid.table[x_pos][y_pos].is_active = not grid.table[x_pos][y_pos].is_active
+                grid.table[x_pos+1][y_pos].is_active = False
 
         for x, row in enumerate(grid.table):
             for y, square in enumerate(row):
