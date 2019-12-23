@@ -26,20 +26,24 @@ class Grid:
 
 if __name__ == '__main__':
     pygame.init()
-    screen = pygame.display.set_mode((1280, 980))
+    screen = pygame.display.set_mode((400, 600))
 
     grid = Grid(10, 20)
 
-    grid.table[5][10].is_active = True
-    count = 0
+    x_pos = 0
+    y_pos = 0
     
     while pygame.event.wait().type != pygame.locals.QUIT:
         screen.fill((255, 255, 255))
         keys = pygame.key.get_pressed()
-
-        if keys[pygame.K_LEFT]:
-            grid.table[0][count].is_active = not grid.table[1][count].is_active
-            count +=1
+        if keys[pygame.K_RIGHT]:
+            x_pos +=1
+            grid.table[x_pos][y_pos].is_active = not grid.table[x_pos][y_pos].is_active
+            grid.table[x_pos-1][y_pos].is_active = False
+        elif keys[pygame.K_LEFT]:
+            x_pos -=1
+            grid.table[x_pos][y_pos].is_active = not grid.table[x_pos][y_pos].is_active
+            grid.table[x_pos+1][y_pos].is_active = False
 
         for x, row in enumerate(grid.table):
             for y, square in enumerate(row):
