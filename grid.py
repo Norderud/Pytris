@@ -25,10 +25,10 @@ class Grid:
     
 
     def l_piece(self):
-        self.table[self.x_pos][self.y_pos].is_active = True
-        self.table[self.x_pos-1][self.y_pos].is_active = True
-        self.table[self.x_pos-2][self.y_pos].is_active = True
-        self.table[self.x_pos][self.y_pos+1].is_active = True
+        self.table[self.y][self.x].is_active = True
+        self.table[self.y][self.x-1].is_active = True
+        self.table[self.y][self.x-2].is_active = True
+        self.table[self.y+1][self.x].is_active = True
 
    
 
