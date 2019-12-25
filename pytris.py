@@ -1,65 +1,36 @@
 import pygame
-import pygame.locals
+from grid import Grid
 
-class Square:
-    def __init__(self, rect):
-        self.is_active = False
-        self.rect = rect
-    
+def update():
+    for row in grid.table:
+        for square in row:
+            if square.is_active:
+                pygame.draw.rect(screen, (0, 0, 0), square.rect)
+    pygame.display.update()
 
-
-class Grid:
-    def load_grid(self, width, height):
-        table = []
-        for tile_x in range(0, width):
-            line = []
-            table.append(line)
-            for tile_y in range(0, height):
-                rect = (tile_x*30, tile_y*30, 30, 30)
-                line.append(Square(rect))
-        return table
-
-    def __init__(self,width, height):
-        self.table = self.load_grid(width, height)
-
-def L_piece():
-    grid.table[x_pos][y_pos].is_active = True
-    grid.table[x_pos-1][y_pos].is_active = True
-    grid.table[x_pos-2][y_pos].is_active = True
-    grid.table[x_pos][y_pos+1].is_active = True
-
-
-    
 if __name__ == '__main__':
     pygame.init()
     screen = pygame.display.set_mode((400, 600))
 
     grid = Grid(10, 20)
-    
-    x_pos = 5
-    y_pos = 0
-    
-    while pygame.event.wait().type != pygame.locals.QUIT:
-        screen.fill((255, 255, 255))
-        L_piece()
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_RIGHT]:
-            if grid.table[9][y_pos].is_active:            #Check if Tetrimino is at the edge of grid
-                continue
-            else:
-                x_pos +=1
-                grid.table[x_pos-3][y_pos].is_active = False
-                grid.table[x_pos-1][y_pos+1].is_active = False
-        elif keys[pygame.K_LEFT]:
-            if grid.table[0][y_pos].is_active:             #Check if Tetrimino is at the edge of grid
-                continue 
-            else:
-                x_pos -=1
-                grid.table[x_pos+1][y_pos].is_active = False
-                grid.table[x_pos+1][y_pos+1].is_active = False
 
-        for x, row in enumerate(grid.table):
-            for y, square in enumerate(row):
-                if square.is_active:
-                    pygame.draw.rect(screen, (0, 0, 0), square.rect)
-        pygame.display.update()
+    pygame.time.set_timer(pygame.USEREVENT+1, 100)
+    running = True
+    while running:
+        screen.fill((255, 255, 255))
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                keys = pygame.key.get_pressed()
+                if keys[pygame.K_RIGHT]:
+                    grid.move_right()
+                elif keys[pygame.K_LEFT]:
+                    grid.move_left()
+            if event.type == pygame.USEREVENT+1:
+                grid.move_down()
+                
+            if event.type == pygame.QUIT:
+                running = False
+                break
+        update()
+    
+            
