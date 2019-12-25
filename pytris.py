@@ -5,6 +5,7 @@ class Square:
     def __init__(self, rect):
         self.is_active = False
         self.rect = rect
+    
 
 
 class Grid:
@@ -21,36 +22,41 @@ class Grid:
     def __init__(self,width, height):
         self.table = self.load_grid(width, height)
 
+def L_piece():
+    grid.table[x_pos][y_pos].is_active = True
+    grid.table[x_pos-1][y_pos].is_active = True
+    grid.table[x_pos-2][y_pos].is_active = True
+    grid.table[x_pos][y_pos+1].is_active = True
 
 
-
+    
 if __name__ == '__main__':
     pygame.init()
     screen = pygame.display.set_mode((400, 600))
 
     grid = Grid(10, 20)
-
-    x_pos = 0
+    
+    x_pos = 5
     y_pos = 0
     
     while pygame.event.wait().type != pygame.locals.QUIT:
         screen.fill((255, 255, 255))
+        L_piece()
         keys = pygame.key.get_pressed()
         if keys[pygame.K_RIGHT]:
-            print(x_pos)
-            if x_pos == 9:
+            if grid.table[9][y_pos].is_active:            #Check if Tetrimino is at the edge of grid
                 continue
             else:
                 x_pos +=1
-                grid.table[x_pos][y_pos].is_active = not grid.table[x_pos][y_pos].is_active
-                grid.table[x_pos-1][y_pos].is_active = False
+                grid.table[x_pos-3][y_pos].is_active = False
+                grid.table[x_pos-1][y_pos+1].is_active = False
         elif keys[pygame.K_LEFT]:
-            if x_pos == 0:
-                continue
+            if grid.table[0][y_pos].is_active:             #Check if Tetrimino is at the edge of grid
+                continue 
             else:
                 x_pos -=1
-                grid.table[x_pos][y_pos].is_active = not grid.table[x_pos][y_pos].is_active
                 grid.table[x_pos+1][y_pos].is_active = False
+                grid.table[x_pos+1][y_pos+1].is_active = False
 
         for x, row in enumerate(grid.table):
             for y, square in enumerate(row):
