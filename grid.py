@@ -5,6 +5,7 @@ class Square:
 
 
 class Grid:
+
     def load_grid(self, width, height):
         table = []
         for x in range(0, width):
@@ -15,15 +16,26 @@ class Grid:
                 line.append(Square(rect))
         return table
 
+
+        
+
     def __init__(self, width, height):
         self.table = self.load_grid(width, height)
         self.x_pos = 0
         self.y_pos = 5
-    
-    
+
+    def l_piece(self):
+        self.table[self.x_pos][self.y_pos].is_active = True
+        self.table[self.x_pos-1][self.y_pos].is_active = True
+        self.table[self.x_pos-2][self.y_pos].is_active = True
+        self.table[self.x_pos][self.y_pos+1].is_active = True
+
+   
 
     def move_right(self):
         if self.x_pos == 9:
+            pass
+        if self.table[self.x_pos+1][self.y_pos].is_active or self.x_pos == 9:
             pass
         else:
             self.x_pos += 1
@@ -32,6 +44,8 @@ class Grid:
 
     def move_left(self):
         if self.x_pos == 0:
+            pass
+        if self.table[self.x_pos-1][self.y_pos].is_active:
             pass
         else:
             self.x_pos -= 1
