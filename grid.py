@@ -35,7 +35,7 @@ class Grid:
     def move_right(self):
         if self.x == 9:
             pass
-        if self.table[self.y][self.x+1].is_active or self.x == 9:
+        if  self.x == 9 or self.table[self.y][self.x+1].is_active:
             pass
         else:
             self.x += 1
