@@ -10,7 +10,7 @@ def update():
 
 if __name__ == '__main__':
     pygame.init()
-    screen = pygame.display.set_mode((400, 600))
+    screen = pygame.display.set_mode((300, 600))
 
     grid = Grid(10, 20)
 
