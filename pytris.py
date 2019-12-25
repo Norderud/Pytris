@@ -2,10 +2,10 @@ import pygame
 from grid import Grid
 
 def update():
-    for row in grid.table:
-        for square in row:
+    for x, row in enumerate(grid.table):
+        for y, square in enumerate(row):
             if square.is_active:
-                pygame.draw.rect(screen, (0, 0, 0), square.rect)
+                pygame.draw.rect(screen, (0, 0, 0), (y*30, x*30, 30, 30))
     pygame.display.update()
 
 if __name__ == '__main__':
@@ -14,7 +14,7 @@ if __name__ == '__main__':
 
     grid = Grid(10, 20)
 
-    pygame.time.set_timer(pygame.USEREVENT+1, 100)
+    pygame.time.set_timer(pygame.USEREVENT+1, 50)
     running = True
     while running:
         screen.fill((255, 255, 255))

@@ -3,66 +3,65 @@ class Square:
         self.is_active = False
         self.rect = rect
 
-
 class Grid:
     def load_grid(self, width, height):
         table = []
-        for x in range(0, width):
+        for y in range(0, height):
             line = []
             table.append(line)
-            for y in range(0, height):
-                rect = (x*30, y*30, 30, 30)
+            for x in range(0, width):
+                rect = (x, y, 30, 30)
                 line.append(Square(rect))
         return table
 
     def __init__(self, width, height):
         self.table = self.load_grid(width, height)
-        self.x_pos = 0
-        self.y_pos = 5
-    
+        self.x = 0
+        self.y = 5
     
 
     def move_right(self):
-        if self.x_pos == 9:
+        if self.x == 9:
             pass
         else:
-            self.x_pos += 1
-            self.table[self.x_pos][self.y_pos].is_active = True
-            self.table[self.x_pos-1][self.y_pos].is_active = False
+            self.x += 1
+            self.table[self.y][self.x].is_active = True
+            self.table[self.y][self.x-1].is_active = False
 
     def move_left(self):
-        if self.x_pos == 0:
+        if self.x == 0:
             pass
         else:
-            self.x_pos -= 1
-            self.table[self.x_pos][self.y_pos].is_active = True
-            self.table[self.x_pos+1][self.y_pos].is_active = False
+            self.x -= 1
+            self.table[self.y][self.x].is_active = True
+            self.table[self.y][self.x+1].is_active = False
 
     def move_down(self):
-        if self.y_pos == 19 or self.table[self.x_pos][self.y_pos+1].is_active == True:
-            self.y_pos = 0
-            self.x_pos = 5
+        if self.y == 19 or self.table[self.y+1][self.x].is_active == True:
+            self.y = 0
+            self.x = 5
             self.check_lines()
         else:
-            self.y_pos += 1
-            self.table[self.x_pos][self.y_pos].is_active = True
-            self.table[self.x_pos][self.y_pos-1].is_active = False
+            self.y += 1
+            self.table[self.y][self.x].is_active = True
+            self.table[self.y-1][self.x].is_active = False
+
 
     def row_is_full(self, row):
-        all_active = True
+        is_full = True
+        s = ""
         for square in row:
+            s += "1" if square.is_active else "0"
             if not square.is_active:
-                all_active = False
-        return all_active
+                is_full = False
+        print(s)
+        return is_full
 
     def remove_line(self, idx):
-        self.table.remove(idx)
-        line = [Square((i*30, 0, 30, 30)) for i in range(10)]
-        self.table.insert(0, line)
+        del self.table[idx]
+        self.table.insert(0, [Square((i*30, 0, 30, 30)) for i in range(10)])
 
     def check_lines(self):
         for i, row in enumerate(self.table):
-            for square in row:
-                print(square.is_active)
-            # if self.row_is_full(row):
-            #     self.remove_line(i)
+            if self.row_is_full(row):
+                self.remove_line(i)
