@@ -1,6 +1,7 @@
 import pygame
 from grid import Grid
 
+
 def update():
     for x, row in enumerate(grid.table):
         for y, square in enumerate(row):
@@ -8,13 +9,14 @@ def update():
                 pygame.draw.rect(screen, (0, 0, 0), (y*30, x*30, 30, 30))
     pygame.display.update()
 
+
 if __name__ == '__main__':
     pygame.init()
     screen = pygame.display.set_mode((300, 600))
 
     grid = Grid(10, 20)
-
-    pygame.time.set_timer(pygame.USEREVENT+1, 50)
+    timer_ms = 100
+    pygame.time.set_timer(pygame.USEREVENT+1, timer_ms)
     running = True
     while running:
         screen.fill((255, 255, 255))
@@ -27,10 +29,8 @@ if __name__ == '__main__':
                     grid.move_left()
             if event.type == pygame.USEREVENT+1:
                 grid.move_down()
-                
+
             if event.type == pygame.QUIT:
                 running = False
                 break
         update()
-    
-            

@@ -3,6 +3,7 @@ class Square:
         self.is_active = False
         self.rect = rect
 
+
 class Grid:
 
     def load_grid(self, width, height):
@@ -15,14 +16,10 @@ class Grid:
                 line.append(Square(rect))
         return table
 
-
-        
-
     def __init__(self, width, height):
         self.table = self.load_grid(width, height)
         self.x = 0
         self.y = 5
-    
 
     def l_piece(self):
         self.table[self.y][self.x].is_active = True
@@ -30,12 +27,10 @@ class Grid:
         self.table[self.y][self.x-2].is_active = True
         self.table[self.y+1][self.x].is_active = True
 
-   
-
     def move_right(self):
         if self.x == 9:
             pass
-        if  self.x == 9 or self.table[self.y][self.x+1].is_active:
+        if self.x == 9 or self.table[self.y][self.x+1].is_active:
             pass
         else:
             self.x += 1
@@ -61,7 +56,6 @@ class Grid:
             self.y += 1
             self.table[self.y][self.x].is_active = True
             self.table[self.y-1][self.x].is_active = False
-
 
     def row_is_full(self, row):
         is_full = True
