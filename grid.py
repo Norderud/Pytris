@@ -20,12 +20,8 @@ class Grid:
         self.table = self.load_grid(width, height)
         self.x = 0
         self.y = 5
+        self.active_piece = I(0)
 
-    def l_piece(self):
-        self.table[self.y][self.x].is_active = True
-        self.table[self.y][self.x-1].is_active = True
-        self.table[self.y][self.x-2].is_active = True
-        self.table[self.y+1][self.x].is_active = True
 
     def move_right(self):
         if self.x == 9:
