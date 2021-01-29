@@ -3,6 +3,7 @@ from grid import Grid
 
 
 def update():
+    grid.draw_active_piece()
     for x, row in enumerate(grid.table):
         for y, square in enumerate(row):
             if square.is_active:

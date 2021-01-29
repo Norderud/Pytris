@@ -8,6 +8,8 @@ class Shape:
         self.y += 1
         for y in self.active_cells:
             y[1] += 1
+
+        print(self.active_cells)
     
     def move_right(self):
         self.x += 1
