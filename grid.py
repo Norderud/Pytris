@@ -1,3 +1,5 @@
+from shapes import I
+
 class Square:
     def __init__(self, rect):
         self.is_active = False
@@ -24,34 +26,14 @@ class Grid:
 
 
     def move_right(self):
-        if self.x == 9:
-            pass
-        if self.x == 9 or self.table[self.y][self.x+1].is_active:
-            pass
-        else:
-            self.x += 1
-            self.table[self.y][self.x].is_active = True
-            self.table[self.y][self.x-1].is_active = False
-
+        self.active_piece.move_right()
+        
     def move_left(self):
-        if self.x == 0:
-            pass
-        if self.table[self.y][self.x-1].is_active:
-            pass
-        else:
-            self.x -= 1
-            self.table[self.y][self.x].is_active = True
-            self.table[self.y][self.x+1].is_active = False
+        self.active_piece.move_left()
 
     def move_down(self):
-        if self.y == 19 or self.table[self.y+1][self.x].is_active == True:
-            self.y = 0
-            self.x = 5
-            self.check_lines()
-        else:
-            self.y += 1
-            self.table[self.y][self.x].is_active = True
-            self.table[self.y-1][self.x].is_active = False
+        self.active_piece.move_down()
+
 
     def row_is_full(self, row):
         is_full = True
@@ -63,6 +45,10 @@ class Grid:
         print(s)
         return is_full
 
+    def draw_active_piece(self):
+        for e in self.active_piece.active_cells:
+            self.table[e[1]][e[0]].is_active = True
+                
     def remove_line(self, idx):
         del self.table[idx]
         self.table.insert(0, [Square((i*30, 0, 30, 30)) for i in range(10)])
