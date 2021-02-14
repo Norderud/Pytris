@@ -6,7 +6,7 @@ def update():
     grid.draw_active_piece()
     for x, row in enumerate(grid.table):
         for y, square in enumerate(row):
-            if square.is_active:
+            if square.state == 1 or square.state == 2:
                 pygame.draw.rect(screen, (0, 0, 0), (y*30, x*30, 30, 30))
     pygame.display.update()
 
