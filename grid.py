@@ -42,7 +42,7 @@ class Grid:
                 self.place_active_piece()
 
     def random_shape(self):
-        switcher = {
+        return {
             0: I(5),
             1: J(5),
             2: L(5),
@@ -51,8 +51,7 @@ class Grid:
             5: T(5),
             6: Z(5)
 
-        }
-        return(switcher.get(r.randint(0, 6)))
+        }.get(r.randint(0, 6))
 
     def draw_active_piece(self):
         for row in self.table:
