@@ -40,6 +40,7 @@ class Grid:
         for c in self.active_piece.active_cells:
             if self.table[c[1]+1][c[0]].state == 2:
                 self.place_active_piece()
+                break
 
     def random_shape(self):
         return {

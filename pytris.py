@@ -16,7 +16,7 @@ if __name__ == '__main__':
     screen = pygame.display.set_mode((300, 600))
 
     grid = Grid(10, 20)
-    timer_ms = 200
+    timer_ms = 100
     pygame.time.set_timer(pygame.USEREVENT+1, timer_ms)
     running = True
     while running:
