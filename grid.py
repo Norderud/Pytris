@@ -10,7 +10,7 @@ class Square:
 
 class Grid:
 
-    def load_grid(self, width, height):
+    def load_game(self, width, height):
         table = []
         for y in range(0, height):
             line = []
@@ -21,10 +21,8 @@ class Grid:
         return table
 
     def __init__(self, width, height):
-        self.table = self.load_grid(width, height)
-        self.x = 0
-        self.y = 5
-        self.active_piece = J(5)
+        self.table = self.load_game(width, height)
+        self.active_piece = self.random_shape()
 
     def move_right(self):
         self.active_piece.move_right()
@@ -42,17 +40,22 @@ class Grid:
                 self.place_active_piece()
                 break
 
-    def random_shape(self):
-        return {
-            0: I(5),
-            1: J(5),
-            2: L(5),
-            3: O(5),
-            4: S(5),
-            5: T(5),
-            6: Z(5)
+    def rotate_active_piece(self):
+        self.active_piece.rotate()
 
-        }.get(r.randint(0, 6))
+    def random_shape(self):
+        start_x = 5
+        shapes = {
+            0: I(start_x),
+            1: J(start_x),
+            2: L(start_x),
+            3: O(start_x),
+            4: S(start_x),
+            5: T(start_x),
+            6: Z(start_x)
+
+        }
+        return shapes.get(r.randint(0, len(shapes)-1))
 
     def draw_active_piece(self):
         for row in self.table:
@@ -76,7 +79,6 @@ class Grid:
             s += str(square.state)
             if square.state == 0:
                 is_full = False
-        print(s)
         return is_full
 
     def remove_line(self, idx):
