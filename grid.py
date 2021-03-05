@@ -5,6 +5,7 @@ import random as r
 class Square:
     def __init__(self, rect):
         self.state = 0
+        self.color = (255,255,255)
         self.rect = rect
 
 
@@ -39,6 +40,7 @@ class Grid:
             if self.table[c[1]+1][c[0]].state == 2:
                 self.place_active_piece()
                 break
+        self.draw_active_piece()
 
     def rotate_active_piece(self):
         self.active_piece.rotate()
@@ -62,9 +64,10 @@ class Grid:
             for s in row:
                 if s.state == 1:
                     s.state = 0
-
-        for e in self.active_piece.active_cells:
-            self.table[e[1]][e[0]].state = 1
+                    s.color = (255,255,255)
+        for cell in self.active_piece.active_cells:
+            self.table[cell[1]][cell[0]].state = 1
+            self.table[cell[1]][cell[0]].color = self.active_piece.color
 
     def place_active_piece(self):
         for e in self.active_piece.active_cells:

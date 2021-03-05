@@ -3,11 +3,10 @@ from grid import Grid
 
 
 def update():
-    game.draw_active_piece()
     for x, row in enumerate(game.table):
         for y, square in enumerate(row):
-            if square.state == 1 or square.state == 2:
-                pygame.draw.rect(screen, game.active_piece.color, (y*30, x*30, 30, 30))
+            pygame.draw.rect(screen, square.color, (y*30, x*30, 30, 30))
+    game.draw_active_piece()
     pygame.display.update()
 
 
