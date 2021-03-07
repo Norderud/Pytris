@@ -5,7 +5,7 @@ import random as r
 class Square:
     def __init__(self, rect):
         self.state = 0
-        self.color = (255,255,255)
+        self.color = (0, 0, 0)
         self.rect = rect
 
 
@@ -64,14 +64,15 @@ class Grid:
             for s in row:
                 if s.state == 1:
                     s.state = 0
-                    s.color = (255,255,255)
+                    s.color = (0, 0, 0)
         for cell in self.active_piece.active_cells:
             self.table[cell[1]][cell[0]].state = 1
             self.table[cell[1]][cell[0]].color = self.active_piece.color
 
     def place_active_piece(self):
-        for e in self.active_piece.active_cells:
-            self.table[e[1]][e[0]].state = 2
+        for cell in self.active_piece.active_cells:
+            self.table[cell[1]][cell[0]].state = 2
+            self.table[cell[1]][cell[0]].color = self.active_piece.color
         self.active_piece = self.random_shape()
         self.check_lines()
 

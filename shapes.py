@@ -46,7 +46,7 @@ class J(Shape):
         super().__init__(start_x)
         self.active_cells.extend(
             [[self.x, self.y+1], [self.x, self.y+2], [self.x-1, self.y+2]])
-        self.color = (255, 255, 0)
+        self.color = (255, 69, 0)
 
 
 class L(Shape):
@@ -54,7 +54,7 @@ class L(Shape):
         super().__init__(start_x)
         self.active_cells.extend(
             [[self.x, self.y+1], [self.x, self.y+2], [self.x+1, self.y+2]])
-        self.color = (0, 255, 255)
+        self.color = (255, 255, 0)
 
 
 class O(Shape):
@@ -78,7 +78,7 @@ class Z(Shape):
         super().__init__(start_x)
         self.active_cells.extend(
             [[self.x, self.y+1], [self.x-1, self.y], [self.x+1, self.y+1]])
-        self.color = (0, 0, 255)
+        self.color = (128, 0, 128)
 
 
 class T(Shape):
@@ -86,6 +86,6 @@ class T(Shape):
         super().__init__(start_x)
         self.active_cells.extend(
             [[self.x, self.y+1], [self.x-1, self.y+1], [self.x+1, self.y+1]])
-        self.color = (0, 255, 255)
+        self.color = (0, 0, 255)
 
 
