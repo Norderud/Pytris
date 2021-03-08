@@ -26,18 +26,27 @@ class Grid:
         self.active_piece = self.random_shape()
 
     def move_right(self):
+        for c in self.active_piece.active_cells:
+            if c[0] >= 9:
+                return
         self.active_piece.move_right()
+        self.draw_active_piece()
 
     def move_left(self):
+        for c in self.active_piece.active_cells:
+            if c[0] <= 0:
+                return
         self.active_piece.move_left()
+        self.draw_active_piece()
 
     def move_down(self):
         self.active_piece.move_down()
+
         if self.active_piece.active_cells[-1][1] >= 19:
             self.place_active_piece()
 
         for c in self.active_piece.active_cells:
-            if self.table[c[1]+1][c[0]].state == 2:
+            if self.table[c[1]+1][c[0]].state == 2 or c[1] >= 19:
                 self.place_active_piece()
                 break
         self.draw_active_piece()
@@ -78,9 +87,7 @@ class Grid:
 
     def row_is_full(self, row):
         is_full = True
-        s = ""
         for square in row:
-            s += str(square.state)
             if square.state == 0:
                 is_full = False
         return is_full
