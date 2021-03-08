@@ -5,7 +5,8 @@ from grid import Grid
 def update():
     for x, row in enumerate(game.table):
         for y, square in enumerate(row):
-            pygame.draw.rect(screen, square.color, ((y*30)-1, (x*30)-1, 29, 29))
+            pygame.draw.rect(screen, square.color,
+                             ((y*30)-1, (x*30)-1, 29, 29))
     pygame.display.update()
 
 
@@ -38,5 +39,5 @@ if __name__ == '__main__':
             if event.type == pygame.QUIT:
                 running = False
                 break
-        
+
         update()

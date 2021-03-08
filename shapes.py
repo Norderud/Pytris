@@ -4,7 +4,6 @@ class Shape:
         self.y = 0
         self.active_cells = [[self.x, self.y]]
 
-
     def move_down(self):
         self.y += 1
         for y in self.active_cells:
@@ -29,7 +28,6 @@ class Shape:
             temp = cell[0] + y_offset
             cell[0] = -cell[1] + x_offset
             cell[1] = temp
-
 
 
 class I(Shape):
@@ -87,5 +85,3 @@ class T(Shape):
         self.active_cells.extend(
             [[self.x, self.y+1], [self.x-1, self.y+1], [self.x+1, self.y+1]])
         self.color = (0, 0, 255)
-
-
