@@ -5,17 +5,14 @@ class Shape:
         self.squares = [[self.x, self.y]]
 
     def move_down(self):
-        self.y += 1
         for y in self.squares:
             y[1] += 1
 
     def move_right(self):
-        self.x += 1
         for x in self.squares:
             x[0] += 1
 
     def move_left(self):
-        self.x -= 1
         for x in self.squares:
             x[0] -= 1
 

@@ -10,7 +10,6 @@ class Square:
 
 
 class Game:
-
     def __init__(self, width, height):
         self.grid = self.init_grid(width, height)
         self.active_piece = self.random_shape()
@@ -29,12 +28,15 @@ class Game:
         for c in self.active_piece.squares:
             if c[0] >= 9:
                 return
+            if self.grid[c[1]][c[0]+1].state == 2:
+                return
+        
         self.active_piece.move_right()
         self.draw_active_piece()
 
     def move_left(self):
         for c in self.active_piece.squares:
-            if c[0] <= 0:
+            if self.grid[c[1]][c[0]-1].state == 2 or c[0] <= 0:
                 return
         self.active_piece.move_left()
         self.draw_active_piece()
@@ -53,6 +55,7 @@ class Game:
 
     def rotate(self):
         self.active_piece.rotate()
+            
 
     def random_shape(self):
         start_x = 5
