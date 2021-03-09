@@ -2,38 +2,38 @@ class Shape:
     def __init__(self, start_x):
         self.x = start_x
         self.y = 0
-        self.active_cells = [[self.x, self.y]]
+        self.squares = [[self.x, self.y]]
 
     def move_down(self):
         self.y += 1
-        for y in self.active_cells:
+        for y in self.squares:
             y[1] += 1
 
     def move_right(self):
         self.x += 1
-        for x in self.active_cells:
+        for x in self.squares:
             x[0] += 1
 
     def move_left(self):
         self.x -= 1
-        for x in self.active_cells:
+        for x in self.squares:
             x[0] -= 1
 
     def rotate(self):
-        center_cell = self.active_cells[1]
-        x_offset = center_cell[0] - (-center_cell[1])
-        y_offset = center_cell[1] - center_cell[0]
+        center_square = self.squares[1]
+        x_offset = center_square[0] - (-center_square[1])
+        y_offset = center_square[1] - center_square[0]
 
-        for cell in self.active_cells:
-            temp = cell[0] + y_offset
-            cell[0] = -cell[1] + x_offset
-            cell[1] = temp
+        for square in self.squares:
+            temp = square[0] + y_offset
+            square[0] = -square[1] + x_offset
+            square[1] = temp
 
 
 class I(Shape):
     def __init__(self, start_x):
         super().__init__(start_x)
-        self.active_cells.extend(
+        self.squares.extend(
             [[self.x, self.y+1], [self.x, self.y+2], [self.x, self.y+3]])
 
         self.color = (255, 0, 0)
@@ -42,7 +42,7 @@ class I(Shape):
 class J(Shape):
     def __init__(self, start_x):
         super().__init__(start_x)
-        self.active_cells.extend(
+        self.squares.extend(
             [[self.x, self.y+1], [self.x, self.y+2], [self.x-1, self.y+2]])
         self.color = (255, 69, 0)
 
@@ -50,7 +50,7 @@ class J(Shape):
 class L(Shape):
     def __init__(self, start_x):
         super().__init__(start_x)
-        self.active_cells.extend(
+        self.squares.extend(
             [[self.x, self.y+1], [self.x, self.y+2], [self.x+1, self.y+2]])
         self.color = (255, 255, 0)
 
@@ -58,7 +58,7 @@ class L(Shape):
 class O(Shape):
     def __init__(self, start_x):
         super().__init__(start_x)
-        self.active_cells.extend(
+        self.squares.extend(
             [[self.x, self.y+1], [self.x+1, self.y], [self.x+1, self.y+1]])
         self.color = (255, 0, 255)
 
@@ -66,7 +66,7 @@ class O(Shape):
 class S(Shape):
     def __init__(self, start_x):
         super().__init__(start_x)
-        self.active_cells.extend(
+        self.squares.extend(
             [[self.x, self.y+1], [self.x+1, self.y], [self.x-1, self.y+1]])
         self.color = (0, 255, 0)
 
@@ -74,7 +74,7 @@ class S(Shape):
 class Z(Shape):
     def __init__(self, start_x):
         super().__init__(start_x)
-        self.active_cells.extend(
+        self.squares.extend(
             [[self.x, self.y+1], [self.x-1, self.y], [self.x+1, self.y+1]])
         self.color = (128, 0, 128)
 
@@ -82,6 +82,6 @@ class Z(Shape):
 class T(Shape):
     def __init__(self, start_x):
         super().__init__(start_x)
-        self.active_cells.extend(
+        self.squares.extend(
             [[self.x, self.y+1], [self.x-1, self.y+1], [self.x+1, self.y+1]])
         self.color = (0, 0, 255)
