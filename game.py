@@ -13,6 +13,7 @@ class Game:
     def __init__(self, width, height):
         self.grid = self.init_grid(width, height)
         self.active_piece = self.random_shape()
+        self.CENTER = 5
 
     def init_grid(self, width, height):
         grid = []
@@ -55,18 +56,18 @@ class Game:
 
     def rotate(self):
         self.active_piece.rotate()
+
             
 
     def random_shape(self):
-        start_x = 5
         shapes = {
-            0: I(start_x),
-            1: J(start_x),
-            2: L(start_x),
-            3: O(start_x),
-            4: S(start_x),
-            5: T(start_x),
-            6: Z(start_x)
+            0: I(self.CENTER),
+            1: J(self.CENTER),
+            2: L(self.CENTER),
+            3: O(self.CENTER),
+            4: S(self.CENTER),
+            5: T(self.CENTER),
+            6: Z(self.CENTER)
 
         }
         return shapes.get(r.randint(0, len(shapes)-1))
