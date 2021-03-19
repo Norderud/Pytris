@@ -11,9 +11,9 @@ class Square:
 
 class Game:
     def __init__(self, width, height):
+        self.CENTER = 5
         self.grid = self.init_grid(width, height)
         self.active_piece = self.random_shape()
-        self.CENTER = 5
 
     def init_grid(self, width, height):
         grid = []
@@ -31,8 +31,9 @@ class Game:
                 return
             if self.grid[c[1]][c[0]+1].state == 2:
                 return
-        
         self.active_piece.move_right()
+        if self.should_be_placed():
+            self.place_active_piece()
         self.draw_active_piece()
 
     def move_left(self):
@@ -40,24 +41,29 @@ class Game:
             if self.grid[c[1]][c[0]-1].state == 2 or c[0] <= 0:
                 return
         self.active_piece.move_left()
+        if self.should_be_placed():
+            self.place_active_piece()
         self.draw_active_piece()
 
     def move_down(self):
         self.active_piece.move_down()
-
-        if self.active_piece.squares[-1][1] >= 19:
+        if self.should_be_placed():
             self.place_active_piece()
+        self.draw_active_piece()
+
+    def should_be_placed(self):
+        b = False
+        if self.active_piece.squares[-1][1] >= 19:
+            b = True
 
         for c in self.active_piece.squares:
             if self.grid[c[1]+1][c[0]].state == 2 or c[1] >= 19:
-                self.place_active_piece()
+                b = True
                 break
-        self.draw_active_piece()
+        return b
 
     def rotate(self):
         self.active_piece.rotate()
-
-            
 
     def random_shape(self):
         shapes = {
