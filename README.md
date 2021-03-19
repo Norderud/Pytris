@@ -6,4 +6,7 @@ pip install pygame
 ```
 
 ## Run
+```
 python pytris.py
+```
+
