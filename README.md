@@ -1,5 +1,6 @@
 # Pytris
-Tetris in python
+Tetris in python 
+
 Made with Pygame
 ```
 pip install pygame
